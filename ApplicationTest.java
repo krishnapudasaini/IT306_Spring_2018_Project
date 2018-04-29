@@ -1,9 +1,9 @@
 package IT306_Spring_2018_Project;
 /**
-* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
+* @author Team Power Rangers(Team 8) 
 * Professor Setareh
 * Class: IT 306-001
-* Project Phase 4 (Preliminary Implementation)
+* Project Phase 5 (Final Implementation)
 * April 22, 2018
 * This is a ApplicationTest implementation class. The array object has instantiated in this class. 
 * Also, hashmap has used in this class. This class prompts the users for all the appointment,
