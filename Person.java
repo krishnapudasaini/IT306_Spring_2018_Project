@@ -1,8 +1,8 @@
 /**
-* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
+* @author Team Power Rangers(Team 8) 
 * Professor Setareh
 * Class: IT 306-001
-* Project Phase 4 (Preliminary Implementation)
+* Project Phase 5 (Final Implementation)
 * April 22, 2018
 * The Person class contains the information about each person, such as patient and doctor.
 * This class is a super class of patient and doctor classes. This class also has a 
