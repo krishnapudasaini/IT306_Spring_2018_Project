@@ -1,9 +1,9 @@
 package IT306_Spring_2018_Project;
 /**
-* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
+* @author Team Power Rangers(Team 8)
 * Professor Setareh
 * Class: IT 306-001
-* Project Phase 4 (Final Implementation)
+* Project Phase 5 (Final Implementation)
 * April 22, 2018
 * The Appointment class contains the information about appointment. This class also contains a default
 * constructor, specific constructor, accessor, mutator, and toString method. 
