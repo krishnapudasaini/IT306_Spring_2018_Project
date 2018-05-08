@@ -4,7 +4,7 @@ package IT306_Spring_2018_Project;
 * Professor Setareh
 * Class: IT 306-001
 * Project Phase 5 (Final Implementation)
-* April 22, 2018
+* May 01, 2018
 * The Patient class contains the information about patient. This class also inherits form person class.
 * This class also has a constructor, a specific constructor, accessors, mutator, and toString method. 
 */
@@ -27,14 +27,24 @@ public Patient(int ID, String name, String gender, int age, String phoneNum, Str
 	++numOfPatients;
 }
 
-//get method for description instance variable
+/**
+@return description
+get method for description instance variable
+*/
 public String getDescription() { return this.description;}
 
-//get method for counter
+/**
+@return numOfPetients
+get method for counter
+*/
 public static int getNumOfPatients() { return numOfPatients;}
 
-//set method for description instance variable 
-//ensures that the description is not null
+/**
+@param description 
+@retrun boolean 
+set method for description instance variable 
+ensures that the description is not null
+*/
 public boolean setDescription(String description)
 {
 	if(description == null || description.equals("") )
@@ -42,19 +52,26 @@ public boolean setDescription(String description)
 		this.description = description.trim();
 		return true;	
 }
-
-//toString method to output this DDC's contents of description
+/**
+ *  @return output 
+ *   toString method to output this DDC's contents of description
+*/
 public String toString()
 {
 	String output = "";
 	output += super.toString() + "|" + getDescription().trim();
 	return output;
 }
+/**
+@return output
+format method  to print well formated report
+for patient information
+*/
 public String format()
 {
-	String output = "\nPATIENT INFORMATION: ";
+	String output = "\nPATIENT INFORMATION => ";
 	output += super.format() 
-			+ "\nPatient description" + getDescription();
+			+ " DESCRIPTION: " + getDescription();
 	return output;
 }
 }
