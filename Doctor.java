@@ -3,8 +3,8 @@ package IT306_Spring_2018_Project;
 * @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
 * Professor Setareh
 * Class: IT 306-001
-* Project Phase 4 (Preliminary Implementation)
-* April 22, 2018
+* Project Phase 5 (Final Implementation)
+* May 01, 2018
 * The Doctor class contains the information about doctor. This class also inherits form person class.
 * This class also has a constructor, a specific constructor, accessors, mutator, and toString method. 
 */
@@ -28,13 +28,24 @@ this.dType = dType;
 ++numOfDoctor;
 }
  
-//get method for type instance variable
+/*
+@return dType
+get method for type instance variable
+*/
 public String getDType() { return this.dType;}
 
-//get method for numofdoctor instance variable
+/*
+@return numOfDoctor
+get method for numofdoctor instance variable
+*/
 public static int getNumOfDoctor() { return numOfDoctor;}
 
-//setter method for type
+/*
+@param type
+@retrun boolean 
+set method for dType instance variable 
+ensures that the type is not null
+*/
 public boolean setDType(String type)
 {
 	if(type == null || type.equals(""))
@@ -46,18 +57,25 @@ public boolean setDType(String type)
 	}
 }
 
-//to string method to output doctor type
+/* @return output 
+toString method to output this dType
+*/
 public String toString()
 {
 	String output = " ";
 	output += super.toString() + "|" + getDType() +"\n";	
 	return output;
 }
+/*
+@return output
+format method  to print well formated report
+for doctor information
+*/
 public String format()
 {
-	String output = "\nDOCTOR'S INFORMATION:";
+	String output = "\nDOCTOR'S INFORMATION => ";
 	output += super.format() 
-			+ "\nDoctor's Type" + getDType()+ "\n";	
+			+ "TYPE: " + getDType()+ "\n";	
 	return output;
 }
 }
