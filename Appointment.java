@@ -1,12 +1,12 @@
 package IT306_Spring_2018_Project;
 /**
-* @author Team Power Rangers(Team 8)
+* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
 * Professor Setareh
 * Class: IT 306-001
 * Project Phase 5 (Final Implementation)
-* April 22, 2018
+* May 01, 2018
 * The Appointment class contains the information about appointment. This class also contains a default
-* constructor, specific constructor, accessor, mutator, and toString method. 
+* constructor, specific constructor, accessor, mutator, toString, and format method. 
 */
 public class Appointment {
 	//instance variables for the appointment class
@@ -40,34 +40,61 @@ public Appointment(int ID,String appDate, String appTimeIn, String appTimeOut,in
 	this.patient = new Patient(pID, pName, pGender, pAge, pPhoneNum, description);
 	this.doctor = new Doctor(dID, dName, dGender, dAge, dPhoneNum, dType);
 }
-
+/**
+@return ID
+get method for ID
+*/
 public int getID(){ return this.ID; }
-
-
-//get method for appointment date variable
+/**
+@return appDate
+get method for appointment date 
+*/
 public String getAppDate(){ return this.appDate; }
-
-//get method for appointment time in
+/**
+@return appTimenIn
+get method for appointment time in
+*/
 public String getAppTimeIn(){ return this.appTimeIn;	}
 
-//get method for appointment time out
+/**
+@return appTimeOut
+get method for appointment time out
+*/
 public String getAppTimeOut(){ return this.appTimeOut; }
-
-//get method for number of appointments
+/**
+@return numOfAppointments
+get method for number of appointments
+*/
 public static int getNumOfAppointments(){ return numOfAppointments; }
 
-//get method for patient
+/**
+@return patient object
+get method for patient
+*/
 public Patient getPatient() { return this.patient; }
 
-//get method for doctor
+/**
+@return doctor object
+get method for doctor
+*/
 public Doctor getDoctor() { return this.doctor;}
-
+/**
+@param id
+@return boolean
+set method for ID
+validate the id input 
+*/
 public boolean setID(int id)
 {
 		ID = id;
 		return true;
 }
-//set method for appointment date to validate the time input is in the correct format
+/**
+@param appDate
+@return boolean
+set method for appointment date 
+validate the time input is in the correct format
+*/
 public boolean setAppDate(String appDate)
 {	
 	if (appDate == null || appDate.length() != 10) return false;
@@ -82,8 +109,12 @@ public boolean setAppDate(String appDate)
 	this.appDate = appDate.trim();
 	return true;
 }
-
-//get method for appointment time in to validate the time input is in the correct format
+/**
+@param timeIn
+@return boolean
+set method for appointment time in
+validate the time input is in the correct format
+*/
 public boolean setAppTimeIn(String timeIn)
 { 
 if (timeIn.length() != 5) return false;
@@ -95,7 +126,11 @@ if (minute < 0 || minute >= 60) return false;
 appTimeIn = timeIn.trim();
 return true;
 }
- 
+/**
+@param time
+@return int
+time validation 
+*/ 
 public int validateTimeNum(String time) {
     try {
         int number = Integer.valueOf(time);
@@ -104,8 +139,12 @@ public int validateTimeNum(String time) {
         return -1;
     }
 }
-
-//set method for setting appointment time out to validate the time input is in the correct format
+/**
+@param timeOut
+@return boolean
+set method for setting appointment time out
+validate the time input is in the correct forat
+*/
 public boolean setAppTimeOut(String timeOut) 
 {
 	if (timeOut.length() != 5) return false;
@@ -117,26 +156,43 @@ public boolean setAppTimeOut(String timeOut)
 	appTimeOut = timeOut.trim();
 	return true;
 }
-
-//setting patient object
+/**
+@return nothing
+setting patient object
+*/
 public void setPatient() { this.patient = new Patient();}
 
-//setting patient description info
+/**
+@param pID, Pname, pGender, pAge, pPhoneNum, description
+@return nothing
+setting patient description info
+*/
 public void setPatient(int pID, String pName, String pGender, int pAge, String pPhoneNum, String description )
 {
 	this.patient = new Patient(pID, pName, pGender, pAge, pPhoneNum, description);
 }
-
-//setting doctor object
+/**
+@return nothing
+setting doctor object
+*/
 public void setDoctor() { this.doctor = new Doctor();}
 
-//setting doctor info
+/**
+@param dID, dName,dGender,dAge,dPhoneNum,dType
+@return nothing
+setting doctor info
+*/
 public void setDoctor(int dID, String dName, String dGender, int dAge, String pPhoneNum, String dType)
 {
 	this.doctor = new Doctor(dID, dName, dGender, dAge, pPhoneNum, dType); 
 }
 
-//to string method  to print everything
+/**
+@return output
+to string method  to print Appointment date, timeIn, timeOut
+patient information
+Doctor information
+*/
 public String toString()
 {
 	String output = "";
@@ -148,12 +204,18 @@ public String toString()
 
 	return output;	
 }
+/**
+@return output
+format method  to print well formated report
+for appointment, patient, doctor information
+*/
 public String format()
 {
-	String output = "\nAppointment Information\n***************************";
-    	output += "\nAppointment Date: "+ getAppDate()
-    			+ "\n Appointment In Time: "+ getAppTimeIn()
-    			+ "\n Appointment Out Time: "+ getAppTimeOut()
+	String output = "\nAPPOINTMENT INFORMATION\n*******************************";
+    	output += "\nAPPOINTMENT =>  ID: "+ getID() +" || "
+    			+ "DATE: "+ getAppDate() +" || "
+    			+ " IN TIME: "+ getAppTimeIn()+" ||"
+    			+ " OUT TIME: "+ getAppTimeOut()
     			+ this.getPatient().format() 
     			+ this.getDoctor().format();
 
