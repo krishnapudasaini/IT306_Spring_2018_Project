@@ -1,9 +1,9 @@
 /**
-* @author Team Power Rangers(Team 8) 
+* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
 * Professor Setareh
 * Class: IT 306-001
 * Project Phase 5 (Final Implementation)
-* April 22, 2018
+* May 01, 2018
 * The Person class contains the information about each person, such as patient and doctor.
 * This class is a super class of patient and doctor classes. This class also has a 
 * constructor, a specific constructor, accessors, mutator, and toString method. 
@@ -26,7 +26,8 @@ public Person ()
 ++numOfPeople;
 }
 
-/*@param ID passing the person ID 
+/**
+ * @param ID passing the person ID 
    @param name passing the person name 
    @param gender passing the person gender 
    @param age passing in the person age
@@ -54,7 +55,11 @@ public String getPhoneNum() { return this.phoneNum; }
 
 public static int getNumOfPeople() { return numOfPeople;}
 
-//@param id passing in the person ID
+/** @param id passing in the person ID 
+@return boolean
+set method for ID instance variable 
+ensures that the ID is not null
+*/
 public boolean setID(int id)
 {
 	if(id < 1 )
@@ -68,7 +73,11 @@ public boolean setID(int id)
 	}
 }
 
-//@ name id passing in the person name 
+/** @param name passing in the person name 
+@return boolean
+set method for name instance variable 
+ensures that the name is not null
+*/
 public boolean setName(String name)
 {
 	if(name == null || name.equals(""))
@@ -79,7 +88,11 @@ public boolean setName(String name)
 		this.name = name.trim();
 		return true;
 }
-// @param gender passing in the person gender 
+/** @param gender passing in the person gender
+@return boolean
+set method for gender instance variable 
+ensures that the gender is not null
+*/
 public boolean setGender(String gender)
 {
 	if(gender == null || gender.equals("")) return false;
@@ -92,7 +105,11 @@ public boolean setGender(String gender)
 		return false;
 	}
 }
-//@param age passing the person age
+/** @param age passing the person age
+@return boolean
+set method for age instance variable 
+ensures that the age is not null
+*/ 
 public boolean setAge(int age)
 {
 	if(age < 0 || age > 110)
@@ -105,7 +122,11 @@ public boolean setAge(int age)
 		return true;
 	}
 }
-//@ phone passing in the phone number 
+/** @param phone passing in the phone number
+@return boolean
+set method for phoneNum instance variable 
+ensures that the phoneNum is not null
+*/
 public boolean setPhoneNum(String phone)
 {
 	char[] phoneNumber = phone.toCharArray();
@@ -132,7 +153,10 @@ public boolean setPhoneNum(String phone)
 	}
 	return false;
 }
-//Print method
+/**
+ * @ return output 
+ * toString method to output this DDC's contents of ID, name, gender, age, phonenumber      
+*/
 public String toString()
 {
 	String output = "";
@@ -143,14 +167,19 @@ public String toString()
 			+ "|" + getPhoneNum();
 	return output;
 }
+/**
+@return output
+format method  to print well formated report
+for person information
+*/
 public String format()
 {
 	String output = "";
-	output += "\nID: " + this.ID 
-			+ "\nName: " + getName() 
-			+ "\nGender: " + getGender()
-			+ "\nAge: "+ getAge() 
-			+ "\nPhone Number: " + getPhoneNum();
+	output += "ID: " + this.ID +" || "
+			+ "NAME: " + getName() +" || "
+			+ "GENDER: " + getGender()+" || "
+			+ "AGE: "+ getAge() +" || "
+			+ "PHONE: " + getPhoneNum()+" || ";
 	return output;
 }
 }
