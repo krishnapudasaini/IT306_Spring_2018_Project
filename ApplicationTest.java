@@ -1,15 +1,4 @@
 package IT306_Spring_2018_Project;
-/**
-* @author Team Power Rangers(Team 8) 
-* Professor Setareh
-* Class: IT 306-001
-* Project Phase 5 (Final Implementation)
-* April 22, 2018
-* This is a ApplicationTest implementation class. The array object has instantiated in this class. 
-* Also, hashmap has used in this class. This class prompts the users for all the appointment,
-* doctors, patients information and validates all the users input. This class also contains delete, 
-* search, add, display all report and display number of appointments, doctors, and patients methods.
-*/
 //importing java utilities
 import java.io.*;
 import java.util.ArrayList;
@@ -19,24 +8,38 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JOptionPane;
-
+/**
+* @author Team Power Rangers(Team 8) Krishna Pudasaini, Susmita Gautam, Somayeh Ameli
+* Professor Setareh
+* Class: IT 306-001
+* Project Phase 5 (Final Implementation)
+* May 01, 2018
+* This is a ApplicationTest implementation class. The HashTable has used in this class. 
+* This class prompts the users for all the appointment,
+* doctors, patients information and validates all the users input. This class also contains delete, 
+* search, add, display all report and display number of appointments, doctors, and patients methods.
+*/
 //applications test
 public class ApplicationTest {
-	public static void main(String[] args) {  //initializing the hash map
+	public static void main(String[] args) {  
+		//initializing the HashTable
 	    Map<Integer,Appointment> map = new Hashtable<Integer,Appointment>();
 		String path = "./src/IT306_Spring_2018_Project/Report.txt";
 		updateMap(map, path);
 	    printMenu(map, path);
 	}	
-	//print menu method to print the options for the user to select 	
+	/**
+	* This method prints menu option for the user to select. 
+	* @param passing HashTable object and files arguments 
+	*/
 	private static void printMenu(Map<Integer, Appointment> map, String path) {	
 		int menuOption = getMenuChoice(); 
 		//while the user has not chosen to exit the application,keep presenting them with the menu option
 		while (menuOption != 10) {
 			switch (menuOption) {
 				case 1:
-					addAllPatients(map);
-					updateFile(map, path);
+					addAllAppointments(map); //it updates the map by adding new appointments from the map
+					updateFile(map, path);//updates the file with the modified map
 					break;
 					
 				case 2:
@@ -78,7 +81,15 @@ public class ApplicationTest {
 			menuOption = getMenuChoice();
 		}
 	}
-	//menu choice option with exceptions if they dont input the proper integer range
+	/**
+	* This method prompts the user for menu options. There are 10 different menu options,
+	* such as, Add an Appointment, Delete an Appointment, Display all Appointments
+	 Display current number of appointments, doctors and patients, 
+	 Search an appointments by appointment id, search an appointments by patient's name,
+	 Search an appointments by doctor's name, Sort appointment by doctor's name
+	 Sort appointment by patient's name, Exit Application 
+	* @returns menuOption 
+	*/
 	private static int getMenuChoice() {
 			int menuOption;
 			do {
@@ -105,14 +116,23 @@ public class ApplicationTest {
 
 			return menuOption;  
 		}		
-	//add patients method that is called when the user selects from the menu to add patients
-	private static void addAllPatients( Map<Integer, Appointment> map) {	//index to keep track of the appointments from the class
+	/**
+	* This method adds appointments into the HashTable, and also, asks the users if
+	* they want to add another appointment. If the user press yes, it will let the 
+	* user to add a new appointment. If the user press no, the program will take the user to the 
+	* main menu. 
+	* @param passing HashTable object 
+	*/
+	private static void addAllAppointments( Map<Integer, Appointment> map) {	//index to keep track of the appointments from the class
 		int index = map.values().size()+1;
 		do {
 			map.put(index++, addAppointment());
 		}while(JOptionPane.showConfirmDialog(null,"Add another Appointment?") == JOptionPane.YES_OPTION);
 	}	    
-	//adding patients into the has map itself
+	/**
+	* This method writes appointments into the text file from the HashTable.
+	* @param passing HashTable object and files arguments 
+	*/
 	public static void updateFile(Map<Integer, Appointment> map, String path) {	//using a buffered writer function to read and write onto the file to keep track of patient and doctor info for appointment
 		BufferedWriter bw = null;
 		try {
@@ -128,7 +148,13 @@ public class ApplicationTest {
 			ex.printStackTrace();
 		}
 	}
-	//adding the appointment information from the user input from the menu 
+	/**
+	* This method prompt an user for all the input for each appointment and 
+	* validates all the user inputs. If the user input invalid information, 
+	* the program will display the error message, so the user will know how 
+	* to enter valid input.
+	* @returns appointment  
+	*/
 	private static Appointment addAppointment() {
 		Appointment appointment = new Appointment();
 		boolean valid = false;
@@ -160,7 +186,13 @@ public class ApplicationTest {
 		addPatient(appointment);
 		return appointment;
 	}
-	//adding patient information 
+	/**
+	* This method prompts an user for each patient information and validates
+	* all the user inputs. If the user input invalid information, the program
+	* will display the error message, so the user will know how to enter valid 
+	* input.
+	* @returns patient  
+	*/
 	private static void addPatient(Appointment appointment) {
 		boolean valid = false;
  		do {
@@ -172,7 +204,7 @@ public class ApplicationTest {
  		
 		valid = false;
 		do {
-			 valid = appointment.getPatient().setGender(JOptionPane.showInputDialog("Enter patient gender"));
+			 valid = appointment.getPatient().setGender(JOptionPane.showInputDialog("Enter patient gender! The gender must be male or female or not specified"));
 			if(!valid) {
 				printErrorMessage("Invalid input for gender");
 			}
@@ -208,7 +240,13 @@ public class ApplicationTest {
 		
 		populateDoctor(appointment);
 	}
-	//populating doctor information
+	/**
+	* This method prompts an user for each doctor information and validates
+	* all the user inputs. If the user input invalid information, the program
+	* will display the error message, so the user will know how to enter valid 
+	* input.
+	* @returns appointment  
+	*/
 	private static void 	populateDoctor(Appointment appointment) {
 		boolean valid = false;
 		do {
@@ -253,11 +291,19 @@ public class ApplicationTest {
 			}
 		}while(!valid);	
 	}
-	//error message anytime any excepion is caught and wrong
+	/**
+	* This method is used to print the error message.
+	* @param error message
+	*/
 	private static void printErrorMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
-	//displaying all appointments
+	/**
+	* This method reads the files and displays all the appointments with patient's
+	* and doctor's information. If there is not any appointment, this method will tell
+	* the user that there is no appointment.
+	* @param HashTable object map and file 
+	*/
 	private static void displayAllAppointments(Map<Integer, Appointment> map,String path) {
 		ArrayList<Appointment> appointmentRecords = readFile(path);
 		if(!map.isEmpty()){
@@ -267,17 +313,24 @@ public class ApplicationTest {
 		    }
 		    JOptionPane.showMessageDialog(null,output);
 		}else {
-			JOptionPane.showMessageDialog(null, "Appointment not found!");		
-	}	
+			printErrorMessage("Appointment not found!");
+		}	
 	}
-	//deleting appointment method
+	/**
+	* This method displays all the appointments and prompts the user to input the 
+	* key for the appointment that they want to delete. If there is not any appointment 
+	*, it will let the user know by displaying error message. Also, if the user 
+	* enters wrong key for deletion, this method will let the user about wrong input.
+	* @param HashTable object map and file 
+	*/
 	private static void deleteAppointment(Map<Integer, Appointment> map, String path) {
-		String output = "";	
+		String output = "";
+		ArrayList<Appointment> appointmentRecords = readFile(path);
 		if(!map.isEmpty()){	
 			int key =0;
-			for(Map.Entry<Integer, Appointment> display : map.entrySet()) {
-				output += "Appointment id" + display.getKey() + display.getValue() + "\n";
-			}
+			for (Appointment appointment : appointmentRecords) {
+		        	output += appointment.format(); 
+		    }
 			do {
 				try {
 					 key = Integer.parseInt(JOptionPane.showInputDialog(output + "\nPlease enter the appointment number you would like to delete."));
@@ -292,13 +345,17 @@ public class ApplicationTest {
 					map.remove(key);	
 				}
 			}else {
-				JOptionPane.showMessageDialog(null, "Appointment not found!");		
+				printErrorMessage("Appointment not found!");
+
 			}
 	}	
 
-	//method to display current total appointments, patients and doctors as per requirements
+	/**
+	* This method displays current total number of appointments, patients, and
+	*  doctors. If there is not any appointment, it will display error message. 
+	* @param HashTable object map and file 
+	*/
 	private static void 	displayCurrentAppointmentsDoctorsPatients(Map<Integer, Appointment> map) {
-		if(!map.isEmpty()) {
 			int appointmentNumber = map.values().size();
 			int patientNumber;
 			int doctorNumber;
@@ -317,31 +374,57 @@ public class ApplicationTest {
 			}
 			patientNumber = patientArray.size();
 			doctorNumber = doctorArray.size();
-			JOptionPane.showMessageDialog(null,"Total Appointments " + appointmentNumber
-					+ "\nTotal Patients " + patientNumber
-					+ "\nTotal Doctors " + doctorNumber);
-		}else {
-			JOptionPane.showMessageDialog(null, "Appointment not found!");		
-		}	
+			JOptionPane.showMessageDialog(null,"Total Appointments: " + appointmentNumber
+					+ "\nTotal Patients: " + patientNumber
+					+ "\nTotal Doctors:    " + doctorNumber);
+	
 	}
-	//method to search the Hashmap by ID 
+	/**
+	* This method will search an appointment by entering a key(Appointment ID)
+	* First of all, it will check if there is any appointment exists. If not, 
+	* it will display error message. IF the user enters wrong key, the program
+	*  will display error message. If the user enters the key that exists, the 
+	*  program will display the particular appointment and exits the program. 
+	* @param HashTable object map 
+	*/
 	private static void searchID(Map<Integer, Appointment> map) {
 		Iterator it =null; 
+		String output = "";
 		if(!map.isEmpty()){
+			int key = 0;
 			it=  map.entrySet().iterator();
-			int key = Integer.parseInt(JOptionPane.showInputDialog("Please enter the appointment number you would like to display."));
+			do {
+				try {
+					 key = Integer.parseInt(JOptionPane.showInputDialog(output + "Please enter the appointment number you would like to display."));
+					 if(key < 1){
+						 printErrorMessage("The Appointment number must be selected from the above list");
+					 	}
+					}catch(NumberFormatException e) {
+						printErrorMessage("Invalid Key entered!");
+						}
+			}while(key == 0);
 			while(it.hasNext()){
-				if(!map.isEmpty() && map.containsKey(key)) {
-					JOptionPane.showMessageDialog(null, "Appointment ID" + map.get(key));
+				if(map.containsKey(key)) {
+					JOptionPane.showMessageDialog(null, map.get(key).format());
 					break;
 				}
 			}
 		}else {
-				JOptionPane.showMessageDialog(null, "Appointment not found!");		
+			printErrorMessage("Appointment not found!");
 		}
 	}
-	
+	/**
+	* This method will search an appointment by entering a patient name
+	* First of all, it will check if there is any appointment exists. If not, 
+	* it will display error message. IF the user enters the patient name that does
+	* not exists, the program will display error message. If the user enters 
+	* the patient name that exists, the program will display the appointment 
+	* with particular patient name. If there are patients that have the same name, 
+	* the program will display all the appointments with all the names. 
+	* @param HashTable object map 
+	*/
 	private static void searchByPatientName(Map<Integer, Appointment> map) {
+		if(!map.isEmpty()) {
 		int index = map.values().size()+1;
 		String name = JOptionPane.showInputDialog("Please enter the patient name for the appointment you would like to find.");
 		ArrayList <Integer> hitList = new ArrayList <Integer> ();
@@ -355,7 +438,7 @@ public class ApplicationTest {
 		String output = "";
 		for(Integer i: hitList) {
 			if(map.containsKey(i)) {
-				output += "Appointment ID" + map.get(i);
+				output +=  map.get(i).format();
 			}
 			output+="\n";
 		}
@@ -365,8 +448,22 @@ public class ApplicationTest {
 		}else {
 			JOptionPane.showMessageDialog(null, output);
 		}
-	}
+		}else {
+			printErrorMessage("Appointment not found.");
 
+		}
+	}
+	/**
+	* This method will search an appointment by entering a doctor name
+	* First of all, it will check if there is any appointment exists. If not, 
+	* it will display error message. IF the user enters the doctor name that does
+	* not exists, the program will display error message. If the user enters 
+	* the doctor name that exists, the program will display the appointment 
+	* with particular doctor name. If there are doctors that have the same name, 
+	* the program will display all the appointments with all the doctors with 
+	* the same names. 
+	* @param HashTable object map 
+	*/
 	private static void searchByDoctorName(Map<Integer, Appointment> map) {
 		int index = map.values().size()+1;
 		String name = JOptionPane.showInputDialog("Please enter the doctor name for the appointment you would like to find.");
@@ -381,19 +478,21 @@ public class ApplicationTest {
 		String output = "";
 		for(Integer i: hitList) {
 			if(map.containsKey(i)) {
-				output += "Appointment ID" + map.get(i);
+				output += "Appointment ID" + map.get(i).format();
 			}
 			output+="\n";
 		}
 		if(hitList.isEmpty()) {
-			String message = "The patient name could not be found.";
-			JOptionPane.showMessageDialog(null, message);
-		}else {
-			JOptionPane.showMessageDialog(null, output);
-		}
+			printErrorMessage("The patient name could not be found.");
+			}else {
+				JOptionPane.showMessageDialog(null, output);
+			}
 	}
-
-	
+	/**
+	* This method will open the text file and read each appointment 
+	* in the text file and close the file. 
+	* @returns appointment records or null 
+	*/
 	private static ArrayList<Appointment> readFile(String path) {
 		BufferedReader bufRead = null;	
 		try{
@@ -434,6 +533,12 @@ public class ApplicationTest {
 		}
 		return null;
 	}
+	/**
+	* This method calls the read file functions. It clears the HashTable
+	* and updates the file information to the HashTable. 
+	* in the text file and close the file. 
+	* @param HashTable object map and file path 
+	*/
 	private static void updateMap(Map<Integer,Appointment> map,String path) {
 		ArrayList<Appointment> appointmentRecords = readFile(path);
 		map.clear();
@@ -443,6 +548,11 @@ public class ApplicationTest {
 	        	map.put(index++, appointment); 
 	    }
 	}
+	/**
+	* This method calls the read file method. Then it shorts each doctor name
+	* using comparator. Then, it prints the sorted list of appointments.  
+	* @param HashTable object map and file path 
+	*/
 	private static void sortByDoctor(Map<Integer,Appointment> map,String path) {
 		ArrayList<Appointment> appointmentRecords = readFile(path);
 		
@@ -458,6 +568,12 @@ public class ApplicationTest {
 	    }
 	    JOptionPane.showMessageDialog(null,output);
 	}
+	/**
+	* This method calls the read file method. Then it shorts each patient name
+	* using comparator. Then, it prints the sorted list of appointments by 
+	* patient name.  
+	* @param HashTable object map and file path 
+	*/
 	private static void sortByPatient(Map<Integer,Appointment> map,String path) {
 		ArrayList<Appointment> appointmentRecords = readFile(path);
 		
